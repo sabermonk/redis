@@ -21,26 +21,168 @@
  */
 
 #include "redis.h"
+<<<<<<< HEAD
 #include "win32_wsiocp.h"
 
+=======
+>>>>>>> upstream/bksave
 #ifdef _WIN32
 
 DWORD WINAPI BkgdSaveThreadProc(LPVOID param);
 void bkgdsave_cleanup();
 
+<<<<<<< HEAD
 
 /* start a background save using a windows thread.
  * used for rdb save and aof save */
 int bkgdsave_start(const char *filename, int (*bkgdfsave_serialize)(char *)) {
+=======
+FILE *bkgdfsave_fopen(const char *filename, const char *mode) {
+    if (server.rdbbkgdfsave.background == 0) {
+        return fopen(filename, mode);
+    }
+
+    if (server.rdbbkgdfsave.state != BKSAVE_IDLE) {
+        errno = EEXIST;
+        return NULL;
+    }
+    server.rdbbkgdfsave.curbuf = NULL;
+    server.rdbbkgdfsave.filename = (char*)zmalloc(strlen(filename) + 1);
+    strcpy(server.rdbbkgdfsave.filename, filename);
+    server.rdbbkgdfsave.mode = (char*)zmalloc(strlen(mode) + 1);
+    strcpy(server.rdbbkgdfsave.mode, mode);
+    server.rdbbkgdfsave.filerename = NULL;
+    server.rdbbkgdfsave.buffers = listCreate();
+    server.rdbbkgdfsave.state = BKSAVE_BUFFERING;
+
+    return (FILE *)&server.rdbbkgdfsave;
+}
+
+size_t bkgdfsave_fwrite(const void *ptr, size_t size, size_t nmemb, FILE *fp) {
+    size_t wsize;
+    if (server.rdbbkgdfsave.background == 0) {
+        return fwrite(ptr, size, nmemb, fp);
+    }
+
+    wsize = size * nmemb;
+
+    if (server.rdbbkgdfsave.state != BKSAVE_BUFFERING) {
+        errno = EINVAL;
+        return 0;
+    }
+
+    if (server.rdbbkgdfsave.curbuf == NULL || wsize > server.rdbbkgdfsave.curbuf->rem) {
+        /* need another buffer */
+        server.rdbbkgdfsave.curbuf = (bkgdfsavehdr*)zmalloc(BKSAVE_BUFSIZE);
+        if (server.rdbbkgdfsave.curbuf == NULL) {
+            errno = EFBIG;
+            server.rdbbkgdfsave.state = BKSAVE_FAILED;
+            return 0;
+        } else {
+            server.rdbbkgdfsave.curbuf->pos = sizeof(bkgdfsavehdr);
+            server.rdbbkgdfsave.curbuf->rem = BKSAVE_BUFSIZE - sizeof(bkgdfsavehdr);
+            if (listAddNodeTail(server.rdbbkgdfsave.buffers, server.rdbbkgdfsave.curbuf) == NULL) {
+                errno = EFBIG;
+                server.rdbbkgdfsave.state = BKSAVE_FAILED;
+                return 0;
+            }
+        }
+    }
+
+    /* we have space in buffer. copy data and adjust position */
+    memcpy((char*)server.rdbbkgdfsave.curbuf + server.rdbbkgdfsave.curbuf->pos, ptr, wsize);
+    server.rdbbkgdfsave.curbuf->pos += wsize;
+    server.rdbbkgdfsave.curbuf->rem -= wsize;
+
+    return nmemb;
+}
+
+int bkgdfsave_fclose(FILE *fp) {
+    if (server.rdbbkgdfsave.background == 0) {
+        return fclose(fp);
+    }
+    return 0;
+}
+
+int bkgdfsave_fflush(FILE *fp) {
+    if (server.rdbbkgdfsave.background == 0) {
+        return fflush(fp);
+    }
+    return 0;
+}
+
+int bkgdfsave_fileno(FILE *fp) {
+    if (server.rdbbkgdfsave.background == 0) {
+        return fileno(fp);
+    }
+    return 0;
+}
+
+int bkgdfsave_fsync(int fd) {
+    if (server.rdbbkgdfsave.background == 0) {
+        return fsync(fd);
+    }
+    return 0;
+}
+
+int bkgdfsave_rename(const char *src, const char *dst) {
+    if (server.rdbbkgdfsave.background == 0) {
+        return rename(src, dst);
+    }
+    server.rdbbkgdfsave.filerename = (char*)zmalloc(strlen(dst) + 1);
+    strcpy(server.rdbbkgdfsave.filerename, dst);
+    return 0;
+}
+
+int bkgdfsave_unlink(const char *src) {
+    if (server.rdbbkgdfsave.background == 0) {
+        return unlink(src);
+    }
+    return 0;
+}
+
+/* block command thread if not read only, and DB being written to buffers */
+void bkgdsave_allowcmd(struct redisCommand *cmd) {
+    /* if cmd is readonly, then allow */
+    if (cmd != NULL && (cmd->flags & REDIS_CMD_READONLY) != 0)
+        return;
+
+    /* block if allowChanges event exists and is not set */
+    if (server.rdbbkgdfsave.allowchanges != NULL) {
+        if (WaitForSingleObject(server.rdbbkgdfsave.allowchanges, 60000) == WAIT_TIMEOUT) {
+            redisLog(REDIS_WARNING,"FATAL: Wait on background save blocking too long.");
+            exit(1);
+        }
+    }
+}
+
+/* test if saving data to buffers. Return 0 if DB updates should be blocked */
+int bkgdsave_allowUpdates() {
+    if (server.rdbbkgdfsave.background == 1)
+        return 0;
+    else
+        return 1;
+}
+
+/* start a background save 
+ * The serialize function could be rdbsave or aofsave */
+int bkgdsave_start(char *filename, int (*bkgdfsave_serialize)(char *)) {
+>>>>>>> upstream/bksave
     if (server.rdbbkgdfsave.state != BKSAVE_IDLE) {
         /* only one background activity at a time is allowed */
         errno = EINVAL;
         return -1;
     }
+<<<<<<< HEAD
     server.rdbbkgdfsave.state = BKSAVE_WRITING;
     cowBkgdSaveStart();
 
     if (server.rdbbkgdfsave.thread == NULL) {
+=======
+
+    if (server.rdbbkgdfsave.thread == NULL) {
+        /* create handles and thread */
+>>>>>>> upstream/bksave
         server.rdbbkgdfsave.dosaveevent = CreateEvent(NULL, FALSE, FALSE, NULL);
         if (server.rdbbkgdfsave.dosaveevent == NULL) {
             goto failed;
@@ -55,12 +197,29 @@ int bkgdsave_start(const char *filename, int (*bkgdfsave_serialize)(char *)) {
         if (server.rdbbkgdfsave.thread == NULL) {
             goto failed;
         }
+<<<<<<< HEAD
     }
 
+=======
+
+        server.rdbbkgdfsave.allowchanges = CreateEvent(NULL, TRUE, TRUE, NULL);
+        if (server.rdbbkgdfsave.allowchanges == NULL) {
+            goto failed;
+        }
+    }
+
+    /* start saving data into buffers */
+    server.rdbbkgdfsave.background = 1;
+>>>>>>> upstream/bksave
     server.rdbbkgdfsave.filename = (char*)zmalloc(strlen(filename) + 1);
     strcpy(server.rdbbkgdfsave.filename, filename);
     server.rdbbkgdfsave.bkgdfsave_serialize = bkgdfsave_serialize;
 
+<<<<<<< HEAD
+=======
+    /* stop data changes until thread has made a copy */
+    ResetEvent(server.rdbbkgdfsave.allowchanges);
+>>>>>>> upstream/bksave
     /* signal background thread to run */
     SetEvent(server.rdbbkgdfsave.dosaveevent);
     return REDIS_OK;
@@ -71,7 +230,10 @@ failed:
     return -1;
 }
 
+<<<<<<< HEAD
 /* terminate the background save thread */
+=======
+>>>>>>> upstream/bksave
 int bkgdsave_termthread() {
     if (server.rdbbkgdfsave.terminateevent != NULL && server.rdbbkgdfsave.thread != NULL) {
         SetEvent(server.rdbbkgdfsave.terminateevent);
@@ -81,6 +243,17 @@ int bkgdsave_termthread() {
     return 0;
 }
 
+<<<<<<< HEAD
+=======
+int bkgdsave_complete(int result) {
+    /* allow data changes again */
+    if (server.rdbbkgdfsave.allowchanges != NULL) {
+        SetEvent(server.rdbbkgdfsave.allowchanges);
+    }
+    return REDIS_OK;
+}
+
+>>>>>>> upstream/bksave
 
 /* cleanup state for thread termination */
 void bkgdsave_cleanup() {
@@ -96,10 +269,18 @@ void bkgdsave_cleanup() {
         CloseHandle(server.rdbbkgdfsave.thread);
         server.rdbbkgdfsave.thread = NULL;
     }
+<<<<<<< HEAD
+=======
+    if (server.rdbbkgdfsave.allowchanges != NULL) {
+        CloseHandle(server.rdbbkgdfsave.allowchanges);
+        server.rdbbkgdfsave.allowchanges = NULL;
+    }
+>>>>>>> upstream/bksave
     if (server.rdbbkgdfsave.filename != NULL) {
         zfree(server.rdbbkgdfsave.filename);
         server.rdbbkgdfsave.filename = NULL;
     }
+<<<<<<< HEAD
     if (server.rdbbkgdfsave.tmpname != NULL) {
         zfree(server.rdbbkgdfsave.tmpname);
         server.rdbbkgdfsave.tmpname = NULL;
@@ -114,13 +295,51 @@ void bkgdsave_init() {
     server.rdbbkgdfsave.state = BKSAVE_IDLE;
     server.rdbbkgdfsave.filename = NULL;
     server.rdbbkgdfsave.tmpname = NULL;
+=======
+    if (server.rdbbkgdfsave.mode != NULL) {
+        zfree(server.rdbbkgdfsave.mode);
+        server.rdbbkgdfsave.mode = NULL;
+    }
+    if (server.rdbbkgdfsave.filerename != NULL) {
+        zfree(server.rdbbkgdfsave.filerename);
+        server.rdbbkgdfsave.filerename = NULL;
+    }
+    if (server.rdbbkgdfsave.buffers != NULL) {
+        listSetFreeMethod(server.rdbbkgdfsave.buffers, zfree);
+        listRelease(server.rdbbkgdfsave.buffers);
+        server.rdbbkgdfsave.buffers = NULL;
+    }
+}
+
+void bkgdsave_init() {
+    server.rdbbkgdfsave.dosaveevent = NULL;
+    server.rdbbkgdfsave.terminateevent = NULL;
+    server.rdbbkgdfsave.allowchanges = NULL;
+    server.rdbbkgdfsave.thread = NULL;
+    server.rdbbkgdfsave.background = 0;
+    server.rdbbkgdfsave.state = BKSAVE_IDLE;
+    server.rdbbkgdfsave.filename = NULL;
+    server.rdbbkgdfsave.mode = NULL;
+    server.rdbbkgdfsave.filerename = NULL;
+    server.rdbbkgdfsave.buffers = NULL;
+>>>>>>> upstream/bksave
 }
 
 
 /* background thread to write buffers to disk */
 DWORD WINAPI BkgdSaveThreadProc(LPVOID param) {
+<<<<<<< HEAD
     HANDLE workorterm[2];
     int rc = REDIS_OK;
+=======
+    bkgdfsave *bkgddata = (bkgdfsave *)param;
+    listIter *iter;
+    listNode *node;
+    FILE *fp = NULL;
+    int rc;
+    char *fname;
+    HANDLE workorterm[2];
+>>>>>>> upstream/bksave
 
     workorterm[0] = server.rdbbkgdfsave.terminateevent;
     workorterm[1] = server.rdbbkgdfsave.dosaveevent;
@@ -136,6 +355,7 @@ DWORD WINAPI BkgdSaveThreadProc(LPVOID param) {
 
         /* start saving data into buffers */
         server.rdbbkgdfsave.background = 1;
+<<<<<<< HEAD
         rc = server.rdbbkgdfsave.bkgdfsave_serialize(server.rdbbkgdfsave.filename);
         server.rdbbkgdfsave.background = 0;
 
@@ -145,6 +365,98 @@ DWORD WINAPI BkgdSaveThreadProc(LPVOID param) {
             server.rdbbkgdfsave.state = BKSAVE_FAILED;
     }
 
+=======
+        /* filename will be overwritten by bkgdfsave_fopen. Save copy to free later */
+        fname = server.rdbbkgdfsave.filename;
+        server.rdbbkgdfsave.filename = NULL;
+        rc = server.rdbbkgdfsave.bkgdfsave_serialize(fname);
+        zfree(fname);
+        server.rdbbkgdfsave.background = 0;
+        /* call complete to ensure write commands allowed */
+        bkgdsave_complete(REDIS_OK);
+
+        if (WaitForSingleObject(server.rdbbkgdfsave.terminateevent, 0) == WAIT_OBJECT_0) {
+            /* terminated early */
+            return 1;
+        }
+
+        /* now write buffers to disk */
+        server.rdbbkgdfsave.state = BKSAVE_WRITING;
+        fp = fopen(server.rdbbkgdfsave.filename, server.rdbbkgdfsave.mode);
+        if (fp == NULL) {
+            redisLog(REDIS_WARNING,"Error opening temp DB file on the final destination: %s", strerror(errno));
+            server.rdbbkgdfsave.state = BKSAVE_FAILED;
+        }
+
+        if (server.rdbbkgdfsave.state == BKSAVE_WRITING) {
+            iter = listGetIterator(server.rdbbkgdfsave.buffers, AL_START_HEAD);
+            if (iter != NULL) {
+                while ((node = listNext(iter))) {
+                    bkgdfsavehdr *curbuf = (bkgdfsavehdr *)listNodeValue(node);
+
+                    if (WaitForSingleObject(server.rdbbkgdfsave.terminateevent, 0) == WAIT_OBJECT_0) {
+                        /* terminate early */
+                        return 1;
+                    }
+                    if (curbuf != NULL) {
+                        rc = fwrite((char*)curbuf + sizeof(bkgdfsavehdr), curbuf->pos - sizeof(bkgdfsavehdr), 1, fp);
+                        if (rc == 0) {
+                            redisLog(REDIS_WARNING,"Error writing temp DB file on the final destination: %s", strerror(errno));
+                            server.rdbbkgdfsave.state = BKSAVE_FAILED;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        if (fp != NULL) {
+            if (server.rdbbkgdfsave.state == BKSAVE_WRITING) {
+                fflush(fp);
+                fsync(fileno(fp));
+            }
+            fclose(fp);
+        }
+
+        if (server.rdbbkgdfsave.state == BKSAVE_WRITING) {
+            if (server.rdbbkgdfsave.filerename != NULL) {
+                int renrc = 0;
+                if (rename(server.rdbbkgdfsave.filename, server.rdbbkgdfsave.filerename) == -1) {
+                    redisLog(REDIS_WARNING,"Error moving temp DB file on the final destination: %s. rename from %s to %s",
+                                strerror(errno), server.rdbbkgdfsave.filename, server.rdbbkgdfsave.filerename);
+                    unlink(server.rdbbkgdfsave.filename);
+                    server.rdbbkgdfsave.state = BKSAVE_FAILED;
+                }
+            }
+        } else {
+            unlink(server.rdbbkgdfsave.filename);
+        }
+
+        if (server.rdbbkgdfsave.buffers != NULL ) {
+            listSetFreeMethod(server.rdbbkgdfsave.buffers, zfree);
+            listRelease(server.rdbbkgdfsave.buffers);
+            server.rdbbkgdfsave.buffers = NULL;
+        }
+        if (server.rdbbkgdfsave.filename != NULL) {
+            zfree(server.rdbbkgdfsave.filename);
+            server.rdbbkgdfsave.filename = NULL;
+        }
+        if (server.rdbbkgdfsave.mode != NULL) {
+            zfree(server.rdbbkgdfsave.mode);
+            server.rdbbkgdfsave.mode = NULL;
+        }
+        if (server.rdbbkgdfsave.filerename != NULL) {
+            zfree(server.rdbbkgdfsave.filerename);
+            server.rdbbkgdfsave.filerename = NULL;
+        }
+
+        if (server.rdbbkgdfsave.state != BKSAVE_FAILED) {
+            server.rdbbkgdfsave.state = BKSAVE_SUCCESS;
+        }
+        redisLog(REDIS_WARNING,"Winthread: completed background writing");
+    }
+
+    redisLog(REDIS_WARNING,"Winthread: exiting");
+>>>>>>> upstream/bksave
     return 0;
 }
 

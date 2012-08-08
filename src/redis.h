@@ -78,9 +78,12 @@
  *     set and the server is using more than 'maxmemory' bytes of memory.
  *     In short: commands with this flag are denied on low memory conditions.
  *   REDIS_CMD_FORCE_REPLICATION:
- *     Force replication even if dirty is 0. */
+ *     Force replication even if dirty is 0.
+ *   REDIS_CMD_READONLY:
+ *     Command does not alter any DB data. */
 #define REDIS_CMD_DENYOOM 4
 #define REDIS_CMD_FORCE_REPLICATION 8
+#define REDIS_CMD_READONLY 16
 
 /* Object types */
 #define REDIS_STRING 0
@@ -422,12 +425,15 @@ struct redisServer {
     pid_t bgrewritechildpid;
 #ifdef _WIN32
     bkgdfsave rdbbkgdfsave;
+<<<<<<< HEAD
     dict *cowDictCopied;
     dict *cowDictConverted;
     int isBackgroundSaving;
     bkgdDbExt *cowSaveDbExt;
     redisDb *cowSaveDb;
     bkgditers cowCurIters;
+=======
+>>>>>>> upstream/bksave
 #endif
     sds bgrewritebuf; /* buffer taken by parent during oppend only rewrite */
     sds aofbuf;       /* AOF buffer, written before entering the event loop */
@@ -726,6 +732,12 @@ int fwriteBulkString(FILE *fp, char *s, unsigned long len);
 int fwriteBulkDouble(FILE *fp, double d);
 int fwriteBulkLongLong(FILE *fp, long long l);
 int fwriteBulkObject(FILE *fp, robj *obj);
+#ifdef _WIN32
+int bkgdfsave_fwriteBulkString(FILE *fp, char *s, unsigned long len);
+int bkgdfsave_fwriteBulkDouble(FILE *fp, double d);
+int bkgdfsave_fwriteBulkLongLong(FILE *fp, long long l);
+int bkgdfsave_fwriteBulkObject(FILE *fp, robj *obj);
+#endif
 
 /* Replication */
 void replicationFeedSlaves(list *slaves, int dictid, robj **argv, int argc);

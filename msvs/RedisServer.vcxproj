@@ -114,7 +114,10 @@
     <ClCompile Include="..\src\util.c" />
     <ClCompile Include="..\src\win32fixes.c" />
     <ClCompile Include="..\src\win32_bksv.c" />
+<<<<<<< HEAD
     <ClCompile Include="..\src\win32_cow.c" />
+=======
+>>>>>>> upstream/bksave
     <ClCompile Include="..\src\win32_wsiocp.c" />
     <ClCompile Include="..\src\ziplist.c" />
     <ClCompile Include="..\src\zipmap.c" />
@@ -145,7 +148,10 @@
     <ClInclude Include="..\src\version.h" />
     <ClInclude Include="..\src\win32fixes.h" />
     <ClInclude Include="..\src\win32_bksv.h" />
+<<<<<<< HEAD
     <ClInclude Include="..\src\win32_cow.h" />
+=======
+>>>>>>> upstream/bksave
     <ClInclude Include="..\src\win32_wsiocp.h" />
     <ClInclude Include="..\src\ziplist.h" />
     <ClInclude Include="..\src\zipmap.h" />

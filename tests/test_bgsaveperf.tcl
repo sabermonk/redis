@@ -1,7 +1,10 @@
+<<<<<<< HEAD
 # Redis test suite. Copyright (C) 2009 Salvatore Sanfilippo antirez@gmail.com
 # This softare is released under the BSD License. See the COPYING file for
 # more information.
 
+=======
+>>>>>>> upstream/bksave
 set tcl_precision 17
 source tests/support/redis.tcl
 source tests/support/server.tcl
@@ -155,11 +158,15 @@ proc test_server_main {} {
 
     # Start the client instances
     set ::clients_pids {}
+<<<<<<< HEAD
     if {$::external} {
       set start_port [expr {$::port}]
     } else {
       set start_port [expr {$::port+100}]
     }
+=======
+    set start_port [expr {$::port+100}]
+>>>>>>> upstream/bksave
     for {set j 0} {$j < $::numclients} {incr j} {
         set start_port [find_available_port $start_port]
         set p [exec tclsh8.5 [info script] {*}$::argv \

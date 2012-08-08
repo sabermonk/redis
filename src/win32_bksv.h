@@ -32,6 +32,12 @@
 #define BKSAVE_WRITING      3
 #define BKSAVE_SUCCESS      4
 #define BKSAVE_FAILED       5
+<<<<<<< HEAD
+=======
+#define BKSAVE_WAITTHREAD   6
+
+#define BKSAVE_BUFSIZE      (1024 * 1024)
+>>>>>>> upstream/bksave
 
 
 /* each buffer has a current postion and remaining space */
@@ -43,10 +49,15 @@ typedef struct bkgdfsavehdr {
 typedef struct bkgdfsave {
     int background;
     int state;
+<<<<<<< HEAD
+=======
+    HANDLE allowchanges;
+>>>>>>> upstream/bksave
     HANDLE dosaveevent;
     HANDLE terminateevent;
     HANDLE thread;
     char *filename;
+<<<<<<< HEAD
     char *tmpname;
     int (*bkgdfsave_serialize)(char *);
 } bkgdfsave;
@@ -54,6 +65,30 @@ typedef struct bkgdfsave {
 void bkgdsave_init();
 int bkgdsave_start(const char *filename, int (*bkgdfsave_serialize)(char *));
 int bkgdsave_termthread();
+=======
+    char *mode;
+    char *filerename;
+    list *buffers;
+    bkgdfsavehdr *curbuf;
+    int (*bkgdfsave_serialize)(char *);
+} bkgdfsave;
+
+int bkgdsave_start(char *filename, int (*bkgdfsave_serialize)(char *));
+FILE *bkgdfsave_fopen(const char *filename, const char *mode);
+size_t bkgdfsave_fwrite(const void *ptr, size_t size, size_t nmemb, FILE *fp);
+int bkgdfsave_fclose(FILE *fp);
+int bkgdfsave_fflush(FILE *fp);
+int bkgdfsave_fsync(int fd);
+int bkgdfsave_rename(const char *src, const char *dst);
+int bkgdfsave_unlink(const char *src);
+int bkgdfsave_fileno(FILE *fp);
+int bkgdsave_termthread();
+void bkgdsave_init();
+int bkgdsave_complete(int result);
+void bkgdsave_allowcmd(struct redisCommand *cmd);
+int bkgdsave_allowUpdates();
+
+>>>>>>> upstream/bksave
 
 #endif
 

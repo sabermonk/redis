@@ -173,6 +173,7 @@ void sendBulkToSlaveDataDone(aeEventLoop *el, int fd, void *privdata, int nwritt
         redisLog(REDIS_NOTICE,"Synchronization with slave succeeded");
     }
 }
+
 void sendBulkToSlave(aeEventLoop *el, int fd, void *privdata, int mask) {
     redisClient *slave = privdata;
     char *buf;

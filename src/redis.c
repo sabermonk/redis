@@ -78,22 +78,22 @@ double R_Zero, R_PosInf, R_NegInf, R_Nan;
 struct redisServer server; /* server global state */
 struct redisCommand *commandTable;
 struct redisCommand readonlyCommandTable[] = {
-    {"get",getCommand,2,0,NULL,1,1,1},
+    {"get",getCommand,2,REDIS_CMD_READONLY,NULL,1,1,1},
     {"set",setCommand,3,REDIS_CMD_DENYOOM,NULL,0,0,0},
     {"setnx",setnxCommand,3,REDIS_CMD_DENYOOM,NULL,0,0,0},
     {"setex",setexCommand,4,REDIS_CMD_DENYOOM,NULL,0,0,0},
     {"append",appendCommand,3,REDIS_CMD_DENYOOM,NULL,1,1,1},
-    {"strlen",strlenCommand,2,0,NULL,1,1,1},
+    {"strlen",strlenCommand,2,REDIS_CMD_READONLY,NULL,1,1,1},
     {"del",delCommand,-2,0,NULL,0,0,0},
-    {"exists",existsCommand,2,0,NULL,1,1,1},
+    {"exists",existsCommand,2,REDIS_CMD_READONLY,NULL,1,1,1},
     {"setbit",setbitCommand,4,REDIS_CMD_DENYOOM,NULL,1,1,1},
-    {"getbit",getbitCommand,3,0,NULL,1,1,1},
+    {"getbit",getbitCommand,3,REDIS_CMD_READONLY,NULL,1,1,1},
     {"setrange",setrangeCommand,4,REDIS_CMD_DENYOOM,NULL,1,1,1},
-    {"getrange",getrangeCommand,4,0,NULL,1,1,1},
-    {"substr",getrangeCommand,4,0,NULL,1,1,1},
+    {"getrange",getrangeCommand,4,REDIS_CMD_READONLY,NULL,1,1,1},
+    {"substr",getrangeCommand,4,REDIS_CMD_READONLY,NULL,1,1,1},
     {"incr",incrCommand,2,REDIS_CMD_DENYOOM,NULL,1,1,1},
     {"decr",decrCommand,2,REDIS_CMD_DENYOOM,NULL,1,1,1},
-    {"mget",mgetCommand,-2,0,NULL,1,-1,1},
+    {"mget",mgetCommand,-2,REDIS_CMD_READONLY,NULL,1,-1,1},
     {"rpush",rpushCommand,-3,REDIS_CMD_DENYOOM,NULL,1,1,1},
     {"lpush",lpushCommand,-3,REDIS_CMD_DENYOOM,NULL,1,1,1},
     {"rpushx",rpushxCommand,3,REDIS_CMD_DENYOOM,NULL,1,1,1},
@@ -104,20 +104,20 @@ struct redisCommand readonlyCommandTable[] = {
     {"brpop",brpopCommand,-3,0,NULL,1,1,1},
     {"brpoplpush",brpoplpushCommand,4,REDIS_CMD_DENYOOM,NULL,1,2,1},
     {"blpop",blpopCommand,-3,0,NULL,1,1,1},
-    {"llen",llenCommand,2,0,NULL,1,1,1},
-    {"lindex",lindexCommand,3,0,NULL,1,1,1},
+    {"llen",llenCommand,2,REDIS_CMD_READONLY,NULL,1,1,1},
+    {"lindex",lindexCommand,3,REDIS_CMD_READONLY,NULL,1,1,1},
     {"lset",lsetCommand,4,REDIS_CMD_DENYOOM,NULL,1,1,1},
-    {"lrange",lrangeCommand,4,0,NULL,1,1,1},
+    {"lrange",lrangeCommand,4,REDIS_CMD_READONLY,NULL,1,1,1},
     {"ltrim",ltrimCommand,4,0,NULL,1,1,1},
     {"lrem",lremCommand,4,0,NULL,1,1,1},
     {"rpoplpush",rpoplpushCommand,3,REDIS_CMD_DENYOOM,NULL,1,2,1},
     {"sadd",saddCommand,-3,REDIS_CMD_DENYOOM,NULL,1,1,1},
     {"srem",sremCommand,-3,0,NULL,1,1,1},
     {"smove",smoveCommand,4,0,NULL,1,2,1},
-    {"sismember",sismemberCommand,3,0,NULL,1,1,1},
-    {"scard",scardCommand,2,0,NULL,1,1,1},
+    {"sismember",sismemberCommand,3,REDIS_CMD_READONLY,NULL,1,1,1},
+    {"scard",scardCommand,2,REDIS_CMD_READONLY,NULL,1,1,1},
     {"spop",spopCommand,2,0,NULL,1,1,1},
-    {"srandmember",srandmemberCommand,2,0,NULL,1,1,1},
+    {"srandmember",srandmemberCommand,2,REDIS_CMD_READONLY,NULL,1,1,1},
     {"sinter",sinterCommand,-2,REDIS_CMD_DENYOOM,NULL,1,-1,1},
     {"sinterstore",sinterstoreCommand,-3,REDIS_CMD_DENYOOM,NULL,2,-1,1},
     {"sunion",sunionCommand,-2,REDIS_CMD_DENYOOM,NULL,1,-1,1},
@@ -132,44 +132,44 @@ struct redisCommand readonlyCommandTable[] = {
     {"zremrangebyrank",zremrangebyrankCommand,4,0,NULL,1,1,1},
     {"zunionstore",zunionstoreCommand,-4,REDIS_CMD_DENYOOM,NULL,0,0,0},
     {"zinterstore",zinterstoreCommand,-4,REDIS_CMD_DENYOOM,NULL,0,0,0},
-    {"zrange",zrangeCommand,-4,0,NULL,1,1,1},
-    {"zrangebyscore",zrangebyscoreCommand,-4,0,NULL,1,1,1},
-    {"zrevrangebyscore",zrevrangebyscoreCommand,-4,0,NULL,1,1,1},
-    {"zcount",zcountCommand,4,0,NULL,1,1,1},
-    {"zrevrange",zrevrangeCommand,-4,0,NULL,1,1,1},
-    {"zcard",zcardCommand,2,0,NULL,1,1,1},
-    {"zscore",zscoreCommand,3,0,NULL,1,1,1},
-    {"zrank",zrankCommand,3,0,NULL,1,1,1},
-    {"zrevrank",zrevrankCommand,3,0,NULL,1,1,1},
+    {"zrange",zrangeCommand,-4,REDIS_CMD_READONLY,NULL,1,1,1},
+    {"zrangebyscore",zrangebyscoreCommand,-4,REDIS_CMD_READONLY,NULL,1,1,1},
+    {"zrevrangebyscore",zrevrangebyscoreCommand,-4,REDIS_CMD_READONLY,NULL,1,1,1},
+    {"zcount",zcountCommand,4,REDIS_CMD_READONLY,NULL,1,1,1},
+    {"zrevrange",zrevrangeCommand,-4,REDIS_CMD_READONLY,NULL,1,1,1},
+    {"zcard",zcardCommand,2,REDIS_CMD_READONLY,NULL,1,1,1},
+    {"zscore",zscoreCommand,3,REDIS_CMD_READONLY,NULL,1,1,1},
+    {"zrank",zrankCommand,3,REDIS_CMD_READONLY,NULL,1,1,1},
+    {"zrevrank",zrevrankCommand,3,REDIS_CMD_READONLY,NULL,1,1,1},
     {"hset",hsetCommand,4,REDIS_CMD_DENYOOM,NULL,1,1,1},
     {"hsetnx",hsetnxCommand,4,REDIS_CMD_DENYOOM,NULL,1,1,1},
-    {"hget",hgetCommand,3,0,NULL,1,1,1},
+    {"hget",hgetCommand,3,REDIS_CMD_READONLY,NULL,1,1,1},
     {"hmset",hmsetCommand,-4,REDIS_CMD_DENYOOM,NULL,1,1,1},
-    {"hmget",hmgetCommand,-3,0,NULL,1,1,1},
+    {"hmget",hmgetCommand,-3,REDIS_CMD_READONLY,NULL,1,1,1},
     {"hincrby",hincrbyCommand,4,REDIS_CMD_DENYOOM,NULL,1,1,1},
     {"hdel",hdelCommand,-3,0,NULL,1,1,1},
-    {"hlen",hlenCommand,2,0,NULL,1,1,1},
-    {"hkeys",hkeysCommand,2,0,NULL,1,1,1},
-    {"hvals",hvalsCommand,2,0,NULL,1,1,1},
-    {"hgetall",hgetallCommand,2,0,NULL,1,1,1},
-    {"hexists",hexistsCommand,3,0,NULL,1,1,1},
+    {"hlen",hlenCommand,2,REDIS_CMD_READONLY,NULL,1,1,1},
+    {"hkeys",hkeysCommand,2,REDIS_CMD_READONLY,NULL,1,1,1},
+    {"hvals",hvalsCommand,2,REDIS_CMD_READONLY,NULL,1,1,1},
+    {"hgetall",hgetallCommand,2,REDIS_CMD_READONLY,NULL,1,1,1},
+    {"hexists",hexistsCommand,3,REDIS_CMD_READONLY,NULL,1,1,1},
     {"incrby",incrbyCommand,3,REDIS_CMD_DENYOOM,NULL,1,1,1},
     {"decrby",decrbyCommand,3,REDIS_CMD_DENYOOM,NULL,1,1,1},
     {"getset",getsetCommand,3,REDIS_CMD_DENYOOM,NULL,1,1,1},
     {"mset",msetCommand,-3,REDIS_CMD_DENYOOM,NULL,1,-1,2},
     {"msetnx",msetnxCommand,-3,REDIS_CMD_DENYOOM,NULL,1,-1,2},
-    {"randomkey",randomkeyCommand,1,0,NULL,0,0,0},
-    {"select",selectCommand,2,0,NULL,0,0,0},
+    {"randomkey",randomkeyCommand,1,REDIS_CMD_READONLY,NULL,0,0,0},
+    {"select",selectCommand,2,REDIS_CMD_READONLY,NULL,0,0,0},
     {"move",moveCommand,3,0,NULL,1,1,1},
     {"rename",renameCommand,3,0,NULL,1,1,1},
     {"renamenx",renamenxCommand,3,0,NULL,1,1,1},
     {"expire",expireCommand,3,0,NULL,0,0,0},
     {"expireat",expireatCommand,3,0,NULL,0,0,0},
-    {"keys",keysCommand,2,0,NULL,0,0,0},
-    {"dbsize",dbsizeCommand,1,0,NULL,0,0,0},
+    {"keys",keysCommand,2,REDIS_CMD_READONLY,NULL,0,0,0},
+    {"dbsize",dbsizeCommand,1,REDIS_CMD_READONLY,NULL,0,0,0},
     {"auth",authCommand,2,0,NULL,0,0,0},
-    {"ping",pingCommand,1,0,NULL,0,0,0},
-    {"echo",echoCommand,2,0,NULL,0,0,0},
+    {"ping",pingCommand,1,REDIS_CMD_READONLY,NULL,0,0,0},
+    {"echo",echoCommand,2,REDIS_CMD_READONLY,NULL,0,0,0},
     {"save",saveCommand,1,0,NULL,0,0,0},
     {"bgsave",bgsaveCommand,1,0,NULL,0,0,0},
     {"bgrewriteaof",bgrewriteaofCommand,1,0,NULL,0,0,0},
@@ -183,23 +183,23 @@ struct redisCommand readonlyCommandTable[] = {
     {"flushdb",flushdbCommand,1,0,NULL,0,0,0},
     {"flushall",flushallCommand,1,0,NULL,0,0,0},
     {"sort",sortCommand,-2,REDIS_CMD_DENYOOM,NULL,1,1,1},
-    {"info",infoCommand,1,0,NULL,0,0,0},
-    {"monitor",monitorCommand,1,0,NULL,0,0,0},
-    {"ttl",ttlCommand,2,0,NULL,1,1,1},
+    {"info",infoCommand,1,REDIS_CMD_READONLY,NULL,0,0,0},
+    {"monitor",monitorCommand,1,REDIS_CMD_READONLY,NULL,0,0,0},
+    {"ttl",ttlCommand,2,REDIS_CMD_READONLY,NULL,1,1,1},
     {"persist",persistCommand,2,0,NULL,1,1,1},
-    {"slaveof",slaveofCommand,3,0,NULL,0,0,0},
+    {"slaveof",slaveofCommand,3,REDIS_CMD_READONLY,NULL,0,0,0},
     {"debug",debugCommand,-2,0,NULL,0,0,0},
     {"config",configCommand,-2,0,NULL,0,0,0},
-    {"subscribe",subscribeCommand,-2,0,NULL,0,0,0},
-    {"unsubscribe",unsubscribeCommand,-1,0,NULL,0,0,0},
-    {"psubscribe",psubscribeCommand,-2,0,NULL,0,0,0},
-    {"punsubscribe",punsubscribeCommand,-1,0,NULL,0,0,0},
+    {"subscribe",subscribeCommand,-2,REDIS_CMD_READONLY,NULL,0,0,0},
+    {"unsubscribe",unsubscribeCommand,-1,REDIS_CMD_READONLY,NULL,0,0,0},
+    {"psubscribe",psubscribeCommand,-2,REDIS_CMD_READONLY,NULL,0,0,0},
+    {"punsubscribe",punsubscribeCommand,-1,REDIS_CMD_READONLY,NULL,0,0,0},
     {"publish",publishCommand,3,REDIS_CMD_FORCE_REPLICATION,NULL,0,0,0},
     {"watch",watchCommand,-2,0,NULL,0,0,0},
     {"unwatch",unwatchCommand,1,0,NULL,0,0,0},
-    {"object",objectCommand,-2,0,NULL,0,0,0},
-    {"client",clientCommand,-2,0,NULL,0,0,0},
-    {"slowlog",slowlogCommand,-2,0,NULL,0,0,0}
+    {"object",objectCommand,-2,REDIS_CMD_READONLY,NULL,0,0,0},
+    {"client",clientCommand,-2,REDIS_CMD_READONLY,NULL,0,0,0},
+    {"slowlog",slowlogCommand,-2,REDIS_CMD_READONLY,NULL,0,0,0}
 };
 
 /*============================ Utility functions ============================ */
@@ -548,6 +548,12 @@ int serverCron(struct aeEventLoop *eventLoop, long long id, void *clientData) {
     REDIS_NOTUSED(id);
     REDIS_NOTUSED(clientData);
 
+#ifdef _WIN32
+    if (bkgdsave_allowUpdates() == 0) {
+        // if writing data to buffers, avoid executing cron which may alter data
+        return 100;
+    }
+#endif
     /* We take a cached value of the unix time in the global state because
      * with virtual memory and aging there is to store the current time
      * in objects at every object access, and accuracy is not needed.
@@ -921,6 +927,7 @@ void initServer() {
     };
     /* ... and cleaned at application exit */
     atexit((void(*)(void)) win32Cleanup);
+    bkgdsave_init();
 #endif
     server.mainthread = pthread_self();
     server.current_client = NULL;
@@ -1145,6 +1152,11 @@ int processCommand(redisClient *c) {
         addReply(c, shared.loadingerr);
         return REDIS_OK;
     }
+
+#ifdef _WIN32
+    /* check if blocked due to saving db */
+    bkgdsave_allowcmd(c->cmd);
+#endif
 
     /* Exec the command */
     if (c->flags & REDIS_MULTI &&

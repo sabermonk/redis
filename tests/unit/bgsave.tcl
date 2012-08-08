@@ -41,7 +41,11 @@ start_server {tags {"other"}} {
         waitForBgsave r
         r debug flushload
         set mem2 [s used_memory]
+<<<<<<< HEAD
         if {[expr {$mem2 - $mem1}] > 500} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+=======
+        if {[expr {$mem2 - $mem1}] > 1000} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+>>>>>>> upstream/bksave
         for {set i 0} {$i < $iter1} {incr i $step1} {
             set v [r get $i]
             assert {$v == $i}
@@ -73,7 +77,11 @@ start_server {tags {"other"}} {
         waitForBgsave r
         r debug flushload
         set mem2 [s used_memory]
+<<<<<<< HEAD
         if {[expr {$mem2 - $mem1}] > 500} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+=======
+        if {[expr {$mem2 - $mem1}] > 1000} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+>>>>>>> upstream/bksave
         for {set i 0} {$i < $iter1} {incr i $step1} {
             set v [r get $i]
             assert {$v == $i}
@@ -107,7 +115,11 @@ start_server {tags {"other"}} {
         waitForBgsave r
         r debug flushload
         set mem2 [s used_memory]
+<<<<<<< HEAD
         if {[expr {$mem2 - $mem1}] > 500} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+=======
+        if {[expr {$mem2 - $mem1}] > 1000} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+>>>>>>> upstream/bksave
         for {set i 0} {$i < $iter1} {incr i $step1} {
             set v [r get $i]
             assert {$v == $i}
@@ -137,7 +149,11 @@ start_server {tags {"other"}} {
         waitForBgsave r
         r debug flushload
         set mem2 [s used_memory]
+<<<<<<< HEAD
         if {[expr {$mem2 - $mem1}] > 500} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+=======
+        if {[expr {$mem2 - $mem1}] > 1000} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+>>>>>>> upstream/bksave
         for {set i 0} {$i < $iter1} {incr i $step1} {
             set v [r get $i]
             assert_equal "$v"  "abcd"
@@ -167,7 +183,11 @@ start_server {tags {"other"}} {
         waitForBgsave r
         r debug flushload
         set mem2 [s used_memory]
+<<<<<<< HEAD
         if {[expr {$mem2 - $mem1}] > 500} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+=======
+        if {[expr {$mem2 - $mem1}] > 1000} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+>>>>>>> upstream/bksave
         for {set i 0} {$i < $iter1} {incr i $step1} {
             set v [r get $i]
             assert_equal "$v"  "abcd"
@@ -197,7 +217,11 @@ start_server {tags {"other"}} {
         waitForBgsave r
         r debug flushload
         set mem2 [s used_memory]
+<<<<<<< HEAD
         if {[expr {$mem2 - $mem1}] > 500} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+=======
+        if {[expr {$mem2 - $mem1}] > 1000} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+>>>>>>> upstream/bksave
         for {set i 0} {$i < $iter1} {incr i $step1} {
             set v [r get $i]
             assert_equal "$v"  "abcd"
@@ -227,7 +251,11 @@ start_server {tags {"other"}} {
         waitForBgsave r
         r debug flushload
         set mem2 [s used_memory]
+<<<<<<< HEAD
         if {[expr {$mem2 - $mem1}] > 500} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+=======
+        if {[expr {$mem2 - $mem1}] > 1000} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+>>>>>>> upstream/bksave
         for {set i 0} {$i < $iter1} {incr i $step1} {
             set v [r get $i]
             assert_equal "$v"  "$i"
@@ -257,7 +285,11 @@ start_server {tags {"other"}} {
         waitForBgsave r
         r debug flushload
         set mem2 [s used_memory]
+<<<<<<< HEAD
         if {[expr {$mem2 - $mem1}] > 500} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+=======
+        if {[expr {$mem2 - $mem1}] > 1000} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+>>>>>>> upstream/bksave
         for {set i 0} {$i < $iter1} {incr i $step1} {
             set v [r get $i]
             assert_equal "$v"  "$i"
@@ -289,7 +321,11 @@ start_server {tags {"other"}} {
         waitForBgsave r
         r debug flushload
         set mem2 [s used_memory]
+<<<<<<< HEAD
         if {[expr {$mem2 - $mem1}] > 500} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+=======
+        if {[expr {$mem2 - $mem1}] > 1000} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+>>>>>>> upstream/bksave
         for {set i 0} {$i < $iter1} {incr i $step1} {
             set v [r get $i]
             assert_equal "$v"  "$i"
@@ -329,7 +365,11 @@ start_server {tags {"other"}} {
         r select 0
         r debug flushload
         set mem2 [s used_memory]
+<<<<<<< HEAD
         if {[expr {$mem2 - $mem1}] > 500} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+=======
+        if {[expr {$mem2 - $mem1}] > 1000} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+>>>>>>> upstream/bksave
         for {set i 0} {$i < $iter1} {incr i $step1} {
             set v [r get $i]
             assert_equal "$v"  "$i"
@@ -359,7 +399,10 @@ start_server {tags {"other"}} {
           assert_equal $i [r lindex mylist $i]
         }
         set mem1 [s used_memory]
+<<<<<<< HEAD
         after 15000
+=======
+>>>>>>> upstream/bksave
         r bgsave
         for {set i 0} {$i < $iterhalf} {incr i $step1} {
             r rpop mylist
@@ -371,7 +414,11 @@ start_server {tags {"other"}} {
         waitForBgsave r
         r debug flushload
         set mem2 [s used_memory]
+<<<<<<< HEAD
         if {[expr {$mem2 - $mem1}] > 500} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+=======
+        if {[expr {$mem2 - $mem1}] > 1000} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+>>>>>>> upstream/bksave
         assert_equal $iter1 [r llen mylist]
         for {set i 0} {$i < $iter1} {incr i $step1} {
             assert_equal $i [r lindex mylist $i]
@@ -404,7 +451,11 @@ start_server {tags {"other"}} {
         waitForBgsave r
         r debug flushload
         set mem2 [s used_memory]
+<<<<<<< HEAD
         if {[expr {$mem2 - $mem1}] > 500} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+=======
+        if {[expr {$mem2 - $mem1}] > 1000} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+>>>>>>> upstream/bksave
         assert_equal $iter1 [r llen mylist]
         for {set i 0} {$i < $iter1} {incr i $step1} {
             assert_equal $i [r lindex mylist $i]
@@ -437,7 +488,11 @@ start_server {tags {"other"}} {
         waitForBgsave r
         r debug flushload
         set mem2 [s used_memory]
+<<<<<<< HEAD
         if {[expr {$mem2 - $mem1}] > 500} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+=======
+        if {[expr {$mem2 - $mem1}] > 1000} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+>>>>>>> upstream/bksave
         assert_equal $iter1 [r llen mylist]
         for {set i 0} {$i < $iter1} {incr i $step1} {
             assert_equal $i [r lindex mylist $i]
@@ -470,7 +525,11 @@ start_server {tags {"other"}} {
         waitForBgsave r
         r debug flushload
         set mem2 [s used_memory]
+<<<<<<< HEAD
         if {[expr {$mem2 - $mem1}] > 500} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+=======
+        if {[expr {$mem2 - $mem1}] > 1000} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+>>>>>>> upstream/bksave
         assert_equal $iter1 [r llen mylist]
         for {set i 0} {$i < $iter1} {incr i $step1} {
             assert_equal $i [r lindex mylist $i]
@@ -503,7 +562,11 @@ start_server {tags {"other"}} {
         waitForBgsave r
         r debug flushload
         set mem2 [s used_memory]
+<<<<<<< HEAD
         if {[expr {$mem2 - $mem1}] > 500} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+=======
+        if {[expr {$mem2 - $mem1}] > 1000} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+>>>>>>> upstream/bksave
         assert_equal $iter1 [r llen mylist]
         for {set i 0} {$i < $iter1} {incr i $step1} {
             assert_equal $i [r lindex mylist $i]
@@ -542,7 +605,11 @@ start_server {tags {"other"}} {
         waitForBgsave r
         r debug flushload
         set mem2 [s used_memory]
+<<<<<<< HEAD
         if {[expr {$mem2 - $mem1}] > 500} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+=======
+        if {[expr {$mem2 - $mem1}] > 1000} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+>>>>>>> upstream/bksave
         assert_equal $iter1 [r llen mylist]
         for {set i 0} {$i < $iter1} {incr i $step1} {
             assert_equal $i [r lindex mylist $i]
@@ -585,7 +652,11 @@ start_server {tags {"other"}} {
         }
         r debug flushload
         set mem2 [s used_memory]
+<<<<<<< HEAD
         if {[expr {$mem2 - $mem1}] > 500} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+=======
+        if {[expr {$mem2 - $mem1}] > 1000} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+>>>>>>> upstream/bksave
         assert_equal $iter1 [r llen mylist]
         for {set i 0} {$i < $iter1} {incr i $step1} {
             assert_equal $i [r lindex mylist $i]
@@ -618,7 +689,11 @@ start_server {tags {"other"}} {
         waitForBgsave r
         r debug flushload
         set mem2 [s used_memory]
+<<<<<<< HEAD
         if {[expr {$mem2 - $mem1}] > 500} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+=======
+        if {[expr {$mem2 - $mem1}] > 1000} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+>>>>>>> upstream/bksave
         assert_equal $iter1 [r llen mylist]
         for {set i 0} {$i < $iter1} {incr i $step1} {
             assert_equal $i [r lindex mylist $i]
@@ -651,7 +726,11 @@ start_server {tags {"other"}} {
         waitForBgsave r
         r debug flushload
         set mem2 [s used_memory]
+<<<<<<< HEAD
         if {[expr {$mem2 - $mem1}] > 500} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+=======
+        if {[expr {$mem2 - $mem1}] > 1000} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+>>>>>>> upstream/bksave
         assert_equal $iter1 [r llen mylist]
         for {set i 0} {$i < $iter1} {incr i $step1} {
             assert_equal $i [r lindex mylist $i]
@@ -685,7 +764,11 @@ start_server {tags {"other"}} {
         waitForBgsave r
         r debug flushload
         set mem2 [s used_memory]
+<<<<<<< HEAD
         if {[expr {$mem2 - $mem1}] > 500} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+=======
+        if {[expr {$mem2 - $mem1}] > 1000} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+>>>>>>> upstream/bksave
         assert_equal $iter1 [r llen mylist]
         for {set i 0} {$i < $iter1} {incr i $step1} {
             assert_equal $i [r lindex mylist $i]
@@ -718,7 +801,11 @@ start_server {tags {"other"}} {
         waitForBgsave r
         r debug flushload
         set mem2 [s used_memory]
+<<<<<<< HEAD
         if {[expr {$mem2 - $mem1}] > 500} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+=======
+        if {[expr {$mem2 - $mem1}] > 1000} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+>>>>>>> upstream/bksave
         assert_equal $iter1 [r llen mylist]
         for {set i 0} {$i < $iter1} {incr i $step1} {
             assert_equal $i [r lindex mylist $i]
@@ -751,7 +838,11 @@ start_server {tags {"other"}} {
         waitForBgsave r
         r debug flushload
         set mem2 [s used_memory]
+<<<<<<< HEAD
         if {[expr {$mem2 - $mem1}] > 500} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+=======
+        if {[expr {$mem2 - $mem1}] > 1000} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+>>>>>>> upstream/bksave
         assert_equal $iter1 [r llen mylist]
         for {set i 0} {$i < $iter1} {incr i $step1} {
             assert_equal $i [r lindex mylist $i]
@@ -784,7 +875,11 @@ start_server {tags {"other"}} {
         waitForBgsave r
         r debug flushload
         set mem2 [s used_memory]
+<<<<<<< HEAD
         if {[expr {$mem2 - $mem1}] > 500} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+=======
+        if {[expr {$mem2 - $mem1}] > 1000} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+>>>>>>> upstream/bksave
         assert_equal $iter1 [r llen mylist]
         for {set i 0} {$i < $iter1} {incr i $step1} {
             assert_equal $i [r lindex mylist $i]
@@ -817,7 +912,11 @@ start_server {tags {"other"}} {
         waitForBgsave r
         r debug flushload
         set mem2 [s used_memory]
+<<<<<<< HEAD
         if {[expr {$mem2 - $mem1}] > 500} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+=======
+        if {[expr {$mem2 - $mem1}] > 1000} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+>>>>>>> upstream/bksave
         assert_equal $iter1 [r llen mylist]
         for {set i 0} {$i < $iter1} {incr i $step1} {
             assert_equal $i [r lindex mylist $i]
@@ -856,7 +955,11 @@ start_server {tags {"other"}} {
         waitForBgsave r
         r debug flushload
         set mem2 [s used_memory]
+<<<<<<< HEAD
         if {[expr {$mem2 - $mem1}] > 500} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+=======
+        if {[expr {$mem2 - $mem1}] > 1000} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+>>>>>>> upstream/bksave
         assert_equal $iter1 [r llen mylist]
         for {set i 0} {$i < $iter1} {incr i $step1} {
             assert_equal $i [r lindex mylist $i]
@@ -899,7 +1002,11 @@ start_server {tags {"other"}} {
         }
         r debug flushload
         set mem2 [s used_memory]
+<<<<<<< HEAD
         if {[expr {$mem2 - $mem1}] > 500} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+=======
+        if {[expr {$mem2 - $mem1}] > 1000} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+>>>>>>> upstream/bksave
         assert_equal $iter1 [r llen mylist]
         for {set i 0} {$i < $iter1} {incr i $step1} {
             assert_equal $i [r lindex mylist $i]
@@ -932,7 +1039,11 @@ start_server {tags {"other"}} {
         waitForBgsave r
         r debug flushload
         set mem2 [s used_memory]
+<<<<<<< HEAD
         if {[expr {$mem2 - $mem1}] > 500} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+=======
+        if {[expr {$mem2 - $mem1}] > 1000} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+>>>>>>> upstream/bksave
         assert_equal $iter1 [r llen mylist]
         for {set i 0} {$i < $iter1} {incr i $step1} {
             assert_equal $i [r lindex mylist $i]
@@ -965,7 +1076,11 @@ start_server {tags {"other"}} {
         waitForBgsave r
         r debug flushload
         set mem2 [s used_memory]
+<<<<<<< HEAD
         if {[expr {$mem2 - $mem1}] > 500} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+=======
+        if {[expr {$mem2 - $mem1}] > 1000} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+>>>>>>> upstream/bksave
         assert_equal $iter1 [r llen mylist]
         for {set i 0} {$i < $iter1} {incr i $step1} {
             assert_equal $i [r lindex mylist $i]
@@ -1000,7 +1115,11 @@ start_server {tags {"other"}} {
         waitForBgsave r
         r debug flushload
         set mem2 [s used_memory]
+<<<<<<< HEAD
         if {[expr {$mem2 - $mem1}] > 500} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+=======
+        if {[expr {$mem2 - $mem1}] > 1000} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+>>>>>>> upstream/bksave
         for {set i 0} {$i < $iter1} {incr i $step1} {
           assert_equal 1 [r sismember myset $i]
         }
@@ -1032,7 +1151,11 @@ start_server {tags {"other"}} {
         waitForBgsave r
         r debug flushload
         set mem2 [s used_memory]
+<<<<<<< HEAD
         if {[expr {$mem2 - $mem1}] > 500} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+=======
+        if {[expr {$mem2 - $mem1}] > 1000} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+>>>>>>> upstream/bksave
         for {set i 0} {$i < $iter1} {incr i $step1} {
           assert_equal 1 [r sismember myset $i]
         }
@@ -1073,7 +1196,11 @@ start_server {tags {"other"}} {
         waitForBgsave r
         r debug flushload
         set mem2 [s used_memory]
+<<<<<<< HEAD
         if {[expr {$mem2 - $mem1}] > 500} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+=======
+        if {[expr {$mem2 - $mem1}] > 1000} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+>>>>>>> upstream/bksave
         for {set i 0} {$i < $iter1} {incr i $step1} {
             assert_equal 1 [r sismember myset $i]
         }
@@ -1114,7 +1241,11 @@ start_server {tags {"other"}} {
         waitForBgsave r
         r debug flushload
         set mem2 [s used_memory]
+<<<<<<< HEAD
         if {[expr {$mem2 - $mem1}] > 500} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+=======
+        if {[expr {$mem2 - $mem1}] > 1000} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+>>>>>>> upstream/bksave
         for {set i 0} {$i < $iter1} {incr i $step1} {
             assert_equal 1 [r sismember myset $i]
         }
@@ -1154,7 +1285,11 @@ start_server {tags {"other"}} {
         waitForBgsave r
         r debug flushload
         set mem2 [s used_memory]
+<<<<<<< HEAD
         if {[expr {$mem2 - $mem1}] > 500} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+=======
+        if {[expr {$mem2 - $mem1}] > 1000} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+>>>>>>> upstream/bksave
         for {set i 0} {$i < $iter1} {incr i $step1} {
             assert_equal 1 [r sismember myset $i]
         }
@@ -1194,7 +1329,11 @@ start_server {tags {"other"}} {
         waitForBgsave r
         r debug flushload
         set mem2 [s used_memory]
+<<<<<<< HEAD
         if {[expr {$mem2 - $mem1}] > 500} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+=======
+        if {[expr {$mem2 - $mem1}] > 1000} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+>>>>>>> upstream/bksave
         for {set i 0} {$i < $iter1} {incr i $step1} {
             assert_equal 1 [r sismember myset $i]
         }
@@ -1232,7 +1371,11 @@ start_server {tags {"other"}} {
         waitForBgsave r
         r debug flushload
         set mem2 [s used_memory]
+<<<<<<< HEAD
         if {[expr {$mem2 - $mem1}] > 500} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+=======
+        if {[expr {$mem2 - $mem1}] > 1000} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+>>>>>>> upstream/bksave
         for {set i 0} {$i < $iter1} {incr i $step1} {
           assert_equal 1 [r sismember myset $i]
         }
@@ -1264,7 +1407,11 @@ start_server {tags {"other"}} {
         waitForBgsave r
         r debug flushload
         set mem2 [s used_memory]
+<<<<<<< HEAD
         if {[expr {$mem2 - $mem1}] > 500} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+=======
+        if {[expr {$mem2 - $mem1}] > 1000} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+>>>>>>> upstream/bksave
         for {set i 0} {$i < $iter1} {incr i $step1} {
           assert_equal 1 [r sismember myset $i]
         }
@@ -1305,7 +1452,11 @@ start_server {tags {"other"}} {
         waitForBgsave r
         r debug flushload
         set mem2 [s used_memory]
+<<<<<<< HEAD
         if {[expr {$mem2 - $mem1}] > 500} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+=======
+        if {[expr {$mem2 - $mem1}] > 1000} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+>>>>>>> upstream/bksave
         for {set i 0} {$i < $iter1} {incr i $step1} {
             assert_equal 1 [r sismember myset $i]
         }
@@ -1346,7 +1497,11 @@ start_server {tags {"other"}} {
         waitForBgsave r
         r debug flushload
         set mem2 [s used_memory]
+<<<<<<< HEAD
         if {[expr {$mem2 - $mem1}] > 500} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+=======
+        if {[expr {$mem2 - $mem1}] > 1000} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+>>>>>>> upstream/bksave
         for {set i 0} {$i < $iter1} {incr i $step1} {
             assert_equal 1 [r sismember myset $i]
         }
@@ -1386,7 +1541,11 @@ start_server {tags {"other"}} {
         waitForBgsave r
         r debug flushload
         set mem2 [s used_memory]
+<<<<<<< HEAD
         if {[expr {$mem2 - $mem1}] > 500} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+=======
+        if {[expr {$mem2 - $mem1}] > 1000} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+>>>>>>> upstream/bksave
         for {set i 0} {$i < $iter1} {incr i $step1} {
             assert_equal 1 [r sismember myset $i]
         }
@@ -1426,7 +1585,11 @@ start_server {tags {"other"}} {
         waitForBgsave r
         r debug flushload
         set mem2 [s used_memory]
+<<<<<<< HEAD
         if {[expr {$mem2 - $mem1}] > 500} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+=======
+        if {[expr {$mem2 - $mem1}] > 1000} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+>>>>>>> upstream/bksave
         for {set i 0} {$i < $iter1} {incr i $step1} {
             assert_equal 1 [r sismember myset $i]
         }
@@ -1465,7 +1628,11 @@ start_server {tags {"other"}} {
         waitForBgsave r
         r debug flushload
         set mem2 [s used_memory]
+<<<<<<< HEAD
         if {[expr {$mem2 - $mem1}] > 500} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+=======
+        if {[expr {$mem2 - $mem1}] > 1000} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+>>>>>>> upstream/bksave
         for {set i 0} {$i < $iter1} {incr i $step1} {
           assert_equal $i [r zscore myset $i]
         }
@@ -1497,7 +1664,11 @@ start_server {tags {"other"}} {
         waitForBgsave r
         r debug flushload
         set mem2 [s used_memory]
+<<<<<<< HEAD
         if {[expr {$mem2 - $mem1}] > 500} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+=======
+        if {[expr {$mem2 - $mem1}] > 1000} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+>>>>>>> upstream/bksave
         for {set i 0} {$i < $iter1} {incr i $step1} {
           assert_equal $i [r zscore myset $i]
         }
@@ -1529,7 +1700,11 @@ start_server {tags {"other"}} {
         waitForBgsave r
         r debug flushload
         set mem2 [s used_memory]
+<<<<<<< HEAD
         if {[expr {$mem2 - $mem1}] > 500} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+=======
+        if {[expr {$mem2 - $mem1}] > 1000} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+>>>>>>> upstream/bksave
         for {set i 0} {$i < $iter1} {incr i $step1} {
           assert_equal $i [r zscore myset $i]
         }
@@ -1561,7 +1736,11 @@ start_server {tags {"other"}} {
         waitForBgsave r
         r debug flushload
         set mem2 [s used_memory]
+<<<<<<< HEAD
         if {[expr {$mem2 - $mem1}] > 500} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+=======
+        if {[expr {$mem2 - $mem1}] > 1000} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+>>>>>>> upstream/bksave
         for {set i 0} {$i < $iter1} {incr i $step1} {
           assert_equal $i [r zscore myset $i]
         }
@@ -1589,7 +1768,11 @@ start_server {tags {"other"}} {
         waitForBgsave r
         r debug flushload
         set mem2 [s used_memory]
+<<<<<<< HEAD
         if {[expr {$mem2 - $mem1}] > 500} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+=======
+        if {[expr {$mem2 - $mem1}] > 1000} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+>>>>>>> upstream/bksave
         for {set i 0} {$i < $iter1} {incr i $step1} {
           assert_equal $i [r zscore myset $i]
         }
@@ -1625,7 +1808,11 @@ start_server {tags {"other"}} {
         waitForBgsave r
         r debug flushload
         set mem2 [s used_memory]
+<<<<<<< HEAD
         if {[expr {$mem2 - $mem1}] > 500} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+=======
+        if {[expr {$mem2 - $mem1}] > 1000} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+>>>>>>> upstream/bksave
         for {set i 0} {$i < $iter1} {incr i $step1} {
             assert_equal $i [r zscore myset $i]
         }
@@ -1665,7 +1852,11 @@ start_server {tags {"other"}} {
         waitForBgsave r
         r debug flushload
         set mem2 [s used_memory]
+<<<<<<< HEAD
         if {[expr {$mem2 - $mem1}] > 500} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+=======
+        if {[expr {$mem2 - $mem1}] > 1000} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+>>>>>>> upstream/bksave
         for {set i 0} {$i < $iter1} {incr i $step1} {
             assert_equal $i [r zscore myset $i]
         }
@@ -1704,7 +1895,11 @@ start_server {tags {"other"}} {
         waitForBgsave r
         r debug flushload
         set mem2 [s used_memory]
+<<<<<<< HEAD
         if {[expr {$mem2 - $mem1}] > 500} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+=======
+        if {[expr {$mem2 - $mem1}] > 1000} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+>>>>>>> upstream/bksave
         for {set i 0} {$i < $iter1} {incr i $step1} {
           assert_equal $i [r zscore myset $i]
         }
@@ -1736,7 +1931,11 @@ start_server {tags {"other"}} {
         waitForBgsave r
         r debug flushload
         set mem2 [s used_memory]
+<<<<<<< HEAD
         if {[expr {$mem2 - $mem1}] > 500} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+=======
+        if {[expr {$mem2 - $mem1}] > 1000} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+>>>>>>> upstream/bksave
         for {set i 0} {$i < $iter1} {incr i $step1} {
           assert_equal $i [r zscore myset $i]
         }
@@ -1768,7 +1967,11 @@ start_server {tags {"other"}} {
         waitForBgsave r
         r debug flushload
         set mem2 [s used_memory]
+<<<<<<< HEAD
         if {[expr {$mem2 - $mem1}] > 500} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+=======
+        if {[expr {$mem2 - $mem1}] > 1000} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+>>>>>>> upstream/bksave
         for {set i 0} {$i < $iter1} {incr i $step1} {
           assert_equal $i [r zscore myset $i]
         }
@@ -1800,7 +2003,11 @@ start_server {tags {"other"}} {
         waitForBgsave r
         r debug flushload
         set mem2 [s used_memory]
+<<<<<<< HEAD
         if {[expr {$mem2 - $mem1}] > 500} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+=======
+        if {[expr {$mem2 - $mem1}] > 1000} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+>>>>>>> upstream/bksave
         for {set i 0} {$i < $iter1} {incr i $step1} {
           assert_equal $i [r zscore myset $i]
         }
@@ -1828,7 +2035,11 @@ start_server {tags {"other"}} {
         waitForBgsave r
         r debug flushload
         set mem2 [s used_memory]
+<<<<<<< HEAD
         if {[expr {$mem2 - $mem1}] > 500} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+=======
+        if {[expr {$mem2 - $mem1}] > 1000} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+>>>>>>> upstream/bksave
         for {set i 0} {$i < $iter1} {incr i $step1} {
           assert_equal $i [r zscore myset $i]
         }
@@ -1864,7 +2075,11 @@ start_server {tags {"other"}} {
         waitForBgsave r
         r debug flushload
         set mem2 [s used_memory]
+<<<<<<< HEAD
         if {[expr {$mem2 - $mem1}] > 500} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+=======
+        if {[expr {$mem2 - $mem1}] > 1000} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+>>>>>>> upstream/bksave
         for {set i 0} {$i < $iter1} {incr i $step1} {
             assert_equal $i [r zscore myset $i]
         }
@@ -1904,7 +2119,11 @@ start_server {tags {"other"}} {
         waitForBgsave r
         r debug flushload
         set mem2 [s used_memory]
+<<<<<<< HEAD
         if {[expr {$mem2 - $mem1}] > 500} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+=======
+        if {[expr {$mem2 - $mem1}] > 1000} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+>>>>>>> upstream/bksave
         for {set i 0} {$i < $iter1} {incr i $step1} {
             assert_equal $i [r zscore myset $i]
         }
@@ -1942,7 +2161,11 @@ start_server {tags {"other"}} {
         waitForBgsave r
         r debug flushload
         set mem2 [s used_memory]
+<<<<<<< HEAD
         if {[expr {$mem2 - $mem1}] > 500} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+=======
+        if {[expr {$mem2 - $mem1}] > 1000} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+>>>>>>> upstream/bksave
         assert_equal $iter1 [r hlen myhash]
         for {set i 0} {$i < $iter1} {incr i $step1} {
             assert_equal $i [r hget myhash $i]
@@ -1978,7 +2201,11 @@ start_server {tags {"other"}} {
         waitForBgsave r
         r debug flushload
         set mem2 [s used_memory]
+<<<<<<< HEAD
         if {[expr {$mem2 - $mem1}] > 500} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+=======
+        if {[expr {$mem2 - $mem1}] > 1000} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+>>>>>>> upstream/bksave
         assert_equal $iter1 [r hlen myhash]
         for {set i 0} {$i < $iter1} {incr i $step1} {
             assert_equal $i [r hget myhash $i]
@@ -2004,17 +2231,29 @@ start_server {tags {"other"}} {
         r bgsave
         for {set i 0} {$i < $iterhalf} {incr i $step1} {
             set j [expr {$i + 5000}]
+<<<<<<< HEAD
             r hsetnx myhash $j $i
+=======
+            r hsetnx myhash $j $i 
+>>>>>>> upstream/bksave
         }
 
         for {set i $iterhalf} {$i < $iter1} {incr i $step1} {
             set j [expr {$i + 6000}]
+<<<<<<< HEAD
             r hsetnx myhash $j $i
+=======
+            r hsetnx myhash $j $i 
+>>>>>>> upstream/bksave
         }
         waitForBgsave r
         r debug flushload
         set mem2 [s used_memory]
+<<<<<<< HEAD
         if {[expr {$mem2 - $mem1}] > 500} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+=======
+        if {[expr {$mem2 - $mem1}] > 1000} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+>>>>>>> upstream/bksave
         assert_equal $iter1 [r hlen myhash]
         for {set i 0} {$i < $iter1} {incr i $step1} {
             assert_equal $i [r hget myhash $i]
@@ -2050,7 +2289,11 @@ start_server {tags {"other"}} {
         waitForBgsave r
         r debug flushload
         set mem2 [s used_memory]
+<<<<<<< HEAD
         if {[expr {$mem2 - $mem1}] > 500} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+=======
+        if {[expr {$mem2 - $mem1}] > 1000} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+>>>>>>> upstream/bksave
         assert_equal $iter1 [r hlen myhash]
         for {set i 0} {$i < $iter1} {incr i $step1} {
             assert_equal $i [r hget myhash $i]
@@ -2084,7 +2327,11 @@ start_server {tags {"other"}} {
         waitForBgsave r
         r debug flushload
         set mem2 [s used_memory]
+<<<<<<< HEAD
         if {[expr {$mem2 - $mem1}] > 500} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+=======
+        if {[expr {$mem2 - $mem1}] > 1000} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+>>>>>>> upstream/bksave
         assert_equal $iter1 [r hlen myhash]
         for {set i 0} {$i < $iter1} {incr i $step1} {
             assert_equal $i [r hget myhash $i]
@@ -2118,7 +2365,11 @@ start_server {tags {"other"}} {
         waitForBgsave r
         r debug flushload
         set mem2 [s used_memory]
+<<<<<<< HEAD
         if {[expr {$mem2 - $mem1}] > 500} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+=======
+        if {[expr {$mem2 - $mem1}] > 1000} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+>>>>>>> upstream/bksave
         assert_equal $iter1 [r hlen myhash]
         for {set i 0} {$i < $iter1} {incr i $step1} {
             assert_equal $i [r hget myhash $i]
@@ -2154,7 +2405,11 @@ start_server {tags {"other"}} {
         waitForBgsave r
         r debug flushload
         set mem2 [s used_memory]
+<<<<<<< HEAD
         if {[expr {$mem2 - $mem1}] > 500} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+=======
+        if {[expr {$mem2 - $mem1}] > 1000} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+>>>>>>> upstream/bksave
         assert_equal $iter1 [r hlen myhash]
         for {set i 0} {$i < $iter1} {incr i $step1} {
             assert_equal $i [r hget myhash $i]
@@ -2180,17 +2435,29 @@ start_server {tags {"other"}} {
         r bgsave
         for {set i 0} {$i < $iterhalf} {incr i $step1} {
             set j [expr {$i + 5000}]
+<<<<<<< HEAD
             r hsetnx myhash $j $i
+=======
+            r hsetnx myhash $j $i 
+>>>>>>> upstream/bksave
         }
 
         for {set i $iterhalf} {$i < $iter1} {incr i $step1} {
             set j [expr {$i + 6000}]
+<<<<<<< HEAD
             r hsetnx myhash $j $i
+=======
+            r hsetnx myhash $j $i 
+>>>>>>> upstream/bksave
         }
         waitForBgsave r
         r debug flushload
         set mem2 [s used_memory]
+<<<<<<< HEAD
         if {[expr {$mem2 - $mem1}] > 500} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+=======
+        if {[expr {$mem2 - $mem1}] > 1000} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+>>>>>>> upstream/bksave
         assert_equal $iter1 [r hlen myhash]
         for {set i 0} {$i < $iter1} {incr i $step1} {
             assert_equal $i [r hget myhash $i]
@@ -2226,7 +2493,11 @@ start_server {tags {"other"}} {
         waitForBgsave r
         r debug flushload
         set mem2 [s used_memory]
+<<<<<<< HEAD
         if {[expr {$mem2 - $mem1}] > 500} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+=======
+        if {[expr {$mem2 - $mem1}] > 1000} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+>>>>>>> upstream/bksave
         assert_equal $iter1 [r hlen myhash]
         for {set i 0} {$i < $iter1} {incr i $step1} {
             assert_equal $i [r hget myhash $i]
@@ -2260,7 +2531,11 @@ start_server {tags {"other"}} {
         waitForBgsave r
         r debug flushload
         set mem2 [s used_memory]
+<<<<<<< HEAD
         if {[expr {$mem2 - $mem1}] > 500} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+=======
+        if {[expr {$mem2 - $mem1}] > 1000} { puts "Warning: used memory before save $mem1 after flushload $mem2" }
+>>>>>>> upstream/bksave
         assert_equal $iter1 [r hlen myhash]
         for {set i 0} {$i < $iter1} {incr i $step1} {
             assert_equal $i [r hget myhash $i]
